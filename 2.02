@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cmath>
+
+const double epsilon = 1e-15;
+
+int main() {
+    double a, b, c;
+    std::cin >> a >> b >> c;
+    if (std::abs(a) < epsilon) {
+        if (std::abs(b) < epsilon) {
+            if (std::abs(c) < epsilon) {
+                std::cout << "R"; //Бесконечно решений
+            } else {
+                std::cout << "Нет корней"; // Нет решений
+            }
+        } else {
+            double x = -c / b;
+            std::cout << x; // Один корень
+        }
+    } else {
+        double D = b * b - 4 * a * c;
+        
+        if (std::abs(D) < epsilon) {  //если D = 0 то 1 корень
+            double x = -b / (2 * a);
+            std::cout << x;
+        } else if (D > 0) {
+            double x1 = (-b - std::sqrt(D)) / (2 * a);
+            double x2 = (-b + std::sqrt(D)) / (2 * a);
+            std::cout << x1 << " " << x2;
+        } else {
+            std::cout << "Нет корней";
+        }
+    }
+}
