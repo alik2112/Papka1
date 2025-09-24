@@ -1,0 +1,30 @@
+#include <iostream>
+#include <numeric>
+int rec_gcd(int a, int b) { // рекурсивная функция
+    if (b == 0) {
+        return a;
+    }
+    return rec_gcd(b, a % b);
+}
+//НОК через НОД
+int lcm(int a, int b) {
+    return (a / rec_gcd(a, b)) * b;
+}
+
+int main() {
+    int num1, num2;
+    std::cin >> num1 >> num2;
+    int my_gcd = rec_gcd(num1, num2);
+    int my_lcm = lcm(num1, num2);
+    int std_gcd = std::gcd(num1, num2); // валидация
+    int std_lcm = std::lcm(num1, num2); // валидация
+    std::cout << "НОД (программы): " << my_gcd << '\n';
+    std::cout << "НОД (std::gcd): " << std_gcd << '\n';
+    std::cout << "НОК (программы): " << my_lcm << '\n';
+    std::cout << "НОК (std::lcm): " << std_lcm << '\n';
+    if (my_gcd == std_gcd && my_lcm == std_lcm) { // проверка корректности
+        std::cout << "Правильно" << '\n';
+    } else {
+        std::cout << "Ошибка" << '\n';
+    }
+}
